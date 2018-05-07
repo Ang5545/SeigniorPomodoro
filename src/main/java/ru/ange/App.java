@@ -1,61 +1,27 @@
 package ru.ange;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import ru.ange.gui.mainpane.MainPane;
 
-/**
- * Hello world!
- *
- */
-/*
-public class App {
-
-    private MainFrame mf;
-
-    public App() {
-        mf = new MainFrame();
-    }
-
-    private void run() {
-        mf.showFrame();
-    }
-
-    private void stop() {
-        mf.hideFrame();
-    }
-
-    public static void main( String[] args ) {
-        App app = new App();
-        app.run();
-    }
-}
-*/
 
 public class App extends Application {
 
+    public static final String APP_NAME = "Seignior Pomodoro";
+    public static final int DEF_WIDTH = 300;
+    public static final int DEF_HEIGHT = 250;
+
+
+
+
     public void start(Stage primaryStage) throws Exception {
 
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        MainPaneController mpc = new MainPaneController();
+        MainPane mainPane = new MainPane(mpc);
 
-            //@Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 300, 250);
-
-        primaryStage.setTitle("Hello World!");
+        Scene scene = new Scene(mainPane, DEF_WIDTH, DEF_HEIGHT);
+        primaryStage.setTitle(APP_NAME);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -63,4 +29,6 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+
 }
