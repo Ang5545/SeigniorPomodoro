@@ -1,4 +1,4 @@
-package ru.ange.gui.mainpane;
+package ru.ange.view.timer;
 
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;

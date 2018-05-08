@@ -3,21 +3,20 @@ package ru.ange;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.ange.gui.mainpane.MainPane;
+import ru.ange.controller.timer.MainPaneController;
+import ru.ange.view.timer.MainPane;
 
 
 public class App extends Application {
 
-    public static final String APP_NAME = "Seignior Pomodoro";
-    public static final int DEF_WIDTH = 300;
-    public static final int DEF_HEIGHT = 250;
-
-
-
+    private static final String APP_NAME = "Seignior Pomodoro";
+    private static final int DEF_WIDTH = 300;
+    private static final int DEF_HEIGHT = 250;
 
     public void start(Stage primaryStage) throws Exception {
-
         MainPaneController mpc = new MainPaneController();
+        mpc.setApp(this);
+
         MainPane mainPane = new MainPane(mpc);
 
         Scene scene = new Scene(mainPane, DEF_WIDTH, DEF_HEIGHT);

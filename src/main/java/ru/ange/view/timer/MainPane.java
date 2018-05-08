@@ -1,4 +1,4 @@
-package ru.ange.gui.mainpane;
+package ru.ange.view.timer;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import ru.ange.MainPaneController;
+import ru.ange.controller.timer.MainPaneController;
 import ru.ange.timer.Subscriber;
 
 public class MainPane extends StackPane implements Subscriber {

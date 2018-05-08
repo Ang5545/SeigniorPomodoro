@@ -1,8 +1,12 @@
-package ru.ange;
+package ru.ange.controller.timer;
 
+import ru.ange.App;
 import ru.ange.timer.Timer;
 
 public class MainPaneController {
+
+    // Reference to the main application.
+    private App app;
 
     private Timer timer;
 
@@ -29,5 +33,14 @@ public class MainPaneController {
 
     public void setTimer(Timer timer) {
         this.timer = timer;
+    }
+
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }
