@@ -9,15 +9,23 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import ru.ange.controller.timer.MainPaneController;
-import ru.ange.timer.Subscriber;
+import ru.ange.controller.timer.Subscriber;
 
 public class MainPane extends StackPane implements Subscriber {
+
+    private static final String START_BTT_TEXT = "Play";
+    private static final String PAUSE_BTT_TEXT = "Pause";
+    private static final String STOP_BTT_TEXT = "Stop";
+
+    private static final String POMODORO_BTT_TEXT = "Pomodoro";
+    private static final String SHORT_BREAK_BTT_TEXT = "Short Break";
+    private static final String LONG_BREAK_BTT_TEXT = "Long break";
+
 
     private MainPaneController mpc;
 
     private Button startBtt;
     private Button stopBtt;
-    private Button pauseBtt;
 
     private Button pomodoroBtt;
     private Button shorBreakBtt;
@@ -27,43 +35,49 @@ public class MainPane extends StackPane implements Subscriber {
 
     public MainPane (final MainPaneController mpc) {
         this.mpc = mpc;
-        mpc.getTimer().subscribe(this);
+        this.mpc.subscribe(this);
 
         // -- init components --
-        this.startBtt = createBtt("Start", new EventHandler<ActionEvent>() {
+        this.startBtt = createBtt(START_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                mpc.startTimer();
+                if (mpc.getTimer().isRun()) {
+                    mpc.pauseTimer();
+                    startBtt.setText(START_BTT_TEXT);
+                } else {
+                    mpc.startTimer();
+                    startBtt.setText(PAUSE_BTT_TEXT);
+                }
             }
         });
-        this.stopBtt = createBtt("Stop", new EventHandler<ActionEvent>() {
+        this.stopBtt = createBtt(STOP_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.stopTimer();
             }
         });
-        this.pauseBtt = createBtt("Pause", new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                mpc.resetTimer();
-            }
-        });
+
 
         HBox bottomButtons = createBttsPane();
-        bottomButtons.getChildren().addAll(startBtt, stopBtt, pauseBtt);
+        bottomButtons.getChildren().addAll(startBtt, stopBtt);
 
         this.timerLabel = new TimerLabel();
+        this.timerLabel.setTime(mpc.getTimer().getCurrentTime());
 
-        this.pomodoroBtt = createBtt("Pause", new EventHandler<ActionEvent>() {
+        this.pomodoroBtt = createBtt(POMODORO_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("Pomodoro");
+                mpc.switchToPomodoro();
+                mpc.startTimer();
             }
         });
-        this.shorBreakBtt = createBtt("Pause", new EventHandler<ActionEvent>() {
+        this.shorBreakBtt = createBtt(SHORT_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("shorBreakBtt");
+                mpc.switchToShortBreak();
+                mpc.startTimer();
             }
         });
-        this.longBreakBtt = createBtt("Pause", new EventHandler<ActionEvent>() {
+        this.longBreakBtt = createBtt(LONG_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println("longBreakBtt");
+                mpc.switchToLongBreak();
+                mpc.startTimer();
             }
         });
 

@@ -2,32 +2,41 @@ package ru.ange;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import ru.ange.conf.Path;
 import ru.ange.controller.timer.MainPaneController;
+import ru.ange.utils.FileLoader;
 import ru.ange.view.timer.MainPane;
+import sun.misc.ClassLoaderUtil;
+
+import java.io.File;
+import java.net.URL;
 
 
 public class App extends Application {
 
     private static final String APP_NAME = "Seignior Pomodoro";
+    private static final String LOGO_FILE_NAME = "logo.png";
+
     private static final int DEF_WIDTH = 300;
     private static final int DEF_HEIGHT = 250;
 
-    public void start(Stage primaryStage) throws Exception {
-        MainPaneController mpc = new MainPaneController();
-        mpc.setApp(this);
-
+    public void start(Stage stage) throws Exception {
+        MainPaneController mpc = new MainPaneController(this);
         MainPane mainPane = new MainPane(mpc);
 
+        Image appIcon = new Image(FileLoader.getResourcePath(Path.RESOURCES_IMAGES_DIR + LOGO_FILE_NAME));
         Scene scene = new Scene(mainPane, DEF_WIDTH, DEF_HEIGHT);
-        primaryStage.setTitle(APP_NAME);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle(APP_NAME);
+        stage.setResizable(false);
+        stage.getIcons().add(appIcon);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }
