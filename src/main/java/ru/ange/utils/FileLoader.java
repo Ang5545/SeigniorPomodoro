@@ -15,8 +15,12 @@ public class FileLoader {
         return new File(path);
     }
 
+    public static URL getResourceURL(String relativePath) {
+        return FileLoader.class.getClassLoader().getResource(relativePath);
+    }
+
     public static String getResourcePath(String relativePath) {
-        URL url = FileLoader.class.getClassLoader().getResource(relativePath);
+        URL url = getResourceURL(relativePath);
         try {
             return url.toURI().toString();
         } catch (URISyntaxException e) {
@@ -25,7 +29,7 @@ public class FileLoader {
     }
 
     public static String getResourceFile(String relativePath) {
-        URL url = FileLoader.class.getClassLoader().getResource(relativePath);
+        URL url = getResourceURL(relativePath);
         return url.getFile();
 
     }
