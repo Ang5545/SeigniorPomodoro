@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: fr.jcgay.snp4j:snp4j:0.3">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/jcgay/snp4j/snp4j/0.3/snp4j-0.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/jcgay/snp4j/snp4j/0.3/snp4j-0.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/fr/jcgay/snp4j/snp4j/0.3/snp4j-0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

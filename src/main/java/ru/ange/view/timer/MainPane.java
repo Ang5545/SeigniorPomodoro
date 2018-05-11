@@ -5,11 +5,17 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import org.classpath.icedtea.pulseaudio.PulseAudioClip;
 import ru.ange.controller.timer.MainPaneController;
 import ru.ange.controller.timer.Subscriber;
+import ru.ange.utils.FileLoader;
 
 public class MainPane extends StackPane implements Subscriber {
 
@@ -21,15 +27,22 @@ public class MainPane extends StackPane implements Subscriber {
     private static final String SHORT_BREAK_BTT_TEXT = "Short Break";
     private static final String LONG_BREAK_BTT_TEXT = "Long break";
 
+    private static final Image START_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/play.png"));
+    private static final Image STOP_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/stop.png"));
+    private static final Image PAUSE_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/pause.png"));
+
+    private static final Image TOMATO_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/tomato.png"));
+    private static final Image CARROT_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/carrot.png"));
+    private static final Image CUCUMBER_IMAGE = new Image(FileLoader.getResourceAsStream("images/buttons/cucumber.png"));
 
     private MainPaneController mpc;
 
     private Button startBtt;
     private Button stopBtt;
 
-    private Button pomodoroBtt;
-    private Button shorBreakBtt;
-    private Button longBreakBtt;
+    private ToggleButton pomodoroBtt;
+    private ToggleButton shorBreakBtt;
+    private ToggleButton longBreakBtt;
 
     private TimerLabel timerLabel;
 
@@ -43,17 +56,21 @@ public class MainPane extends StackPane implements Subscriber {
                 if (mpc.getTimer().isRun()) {
                     mpc.pauseTimer();
                     startBtt.setText(START_BTT_TEXT);
+                    startBtt.setGraphic(getBttImageView(START_IMAGE));
                 } else {
                     mpc.startTimer();
                     startBtt.setText(PAUSE_BTT_TEXT);
+                    startBtt.setGraphic(getBttImageView(PAUSE_IMAGE));
                 }
+
             }
-        });
+        }, START_IMAGE,80);
+
         this.stopBtt = createBtt(STOP_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.stopTimer();
             }
-        });
+        }, STOP_IMAGE,80);
 
 
         HBox bottomButtons = createBttsPane();
@@ -62,24 +79,31 @@ public class MainPane extends StackPane implements Subscriber {
         this.timerLabel = new TimerLabel();
         this.timerLabel.setTime(mpc.getTimer().getCurrentTime());
 
-        this.pomodoroBtt = createBtt(POMODORO_BTT_TEXT, new EventHandler<ActionEvent>() {
+
+        ToggleGroup group = new PersistentButtonToggleGroup();
+
+
+        this.pomodoroBtt = createToggleBtt(POMODORO_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.switchToPomodoro();
                 mpc.startTimer();
             }
-        });
-        this.shorBreakBtt = createBtt(SHORT_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
+        }, TOMATO_IMAGE, 110, group);
+        pomodoroBtt.setSelected(true);
+
+        this.shorBreakBtt = createToggleBtt(SHORT_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.switchToShortBreak();
                 mpc.startTimer();
             }
-        });
-        this.longBreakBtt = createBtt(LONG_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
+        }, CUCUMBER_IMAGE, 110, group);
+
+        this.longBreakBtt = createToggleBtt(LONG_BREAK_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.switchToLongBreak();
                 mpc.startTimer();
             }
-        });
+        }, CARROT_IMAGE, 110, group);
 
         HBox topButtons = createBttsPane();
         topButtons.getChildren().addAll(pomodoroBtt, shorBreakBtt, longBreakBtt);
@@ -97,18 +121,42 @@ public class MainPane extends StackPane implements Subscriber {
     }
 
 
-    private Button createBtt(String name, EventHandler<ActionEvent> event) {
-        Button btt = new Button(name);
+    private Button createBtt(String name, EventHandler<ActionEvent> event, Image image) {
+        Button btt = new Button(name, getBttImageView(image));
         btt.setOnAction(event);
         return btt;
     }
+
+    private Button createBtt(String name, EventHandler<ActionEvent> event, Image image, int width) {
+        Button btt = createBtt(name, event, image);
+        btt.setMaxWidth(width);
+        btt.setMinWidth(width);
+        return btt;
+    }
+
+    public ImageView getBttImageView(Image image) {
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(16);
+        imageView.setFitWidth(16);
+        return imageView;
+    }
+
 
     private HBox createBttsPane() {
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
         hbox.setPadding(new Insets(15, 12, 15, 12));
         hbox.setSpacing(10);
-        hbox.setStyle("-fx-background-color: #336699;");
+        hbox.setStyle("-fx-background-color: rgb(223, 75, 75);");
         return hbox;
+    }
+
+    public ToggleButton createToggleBtt(String name, EventHandler<ActionEvent> event, Image image, int width, ToggleGroup group) {
+        ToggleButton tbtt = new ToggleButton(name, getBttImageView(image));
+        tbtt.setOnAction(event);
+        tbtt.setMaxWidth(width);
+        tbtt.setMinWidth(width);
+        tbtt.setToggleGroup(group);
+        return tbtt;
     }
 }

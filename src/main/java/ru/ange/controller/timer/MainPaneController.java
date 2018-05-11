@@ -59,13 +59,6 @@ public class MainPaneController {
         this.timer = timer;
     }
 
-//    public App getApp() {
-//        return app;
-//    }
-//    public void setApp(App app) {
-//        this.app = app;
-//    }
-
 
     public void startTimer() {
         this.timeline.play();
@@ -100,19 +93,23 @@ public class MainPaneController {
 
     public void switchToPomodoro() {
         this.timer = pomodo;
-        this.timeline.setCycleCount(timer.getDefTime());
-        notifySubscribers(timer.getCurrentTime());
+        refreshTimer();
     }
 
     public void switchToShortBreak() {
         this.timer = shortBreak;
-        this.timeline.setCycleCount(timer.getDefTime());
-        notifySubscribers(timer.getCurrentTime());
+        refreshTimer();
     }
 
     public void switchToLongBreak() {
         this.timer = longBreak;
-        this.timeline.setCycleCount(timer.getDefTime());
-        notifySubscribers(timer.getCurrentTime());
+        refreshTimer();
     }
+
+    private void refreshTimer() {
+        this.timer.reset();
+        this.timeline.setCycleCount(timer.getDefTime());
+        notifySubscribers(timer.getDefTime());
+    }
+
 }

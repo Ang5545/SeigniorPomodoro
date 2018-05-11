@@ -9,7 +9,7 @@ public class TimerLabel extends Label {
     private static final int MIN = 60;
 
     private static final String FONT_NAME = "Arial";
-    private static final int FONT_SIZE = 60;
+    private static final int FONT_SIZE = 90;
 
     private static final String TIME_PATT = "%s:%s";
 

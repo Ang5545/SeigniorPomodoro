@@ -9,11 +9,7 @@ import ru.ange.controller.timer.MainPaneController;
 import ru.ange.utils.AwtTrayConfigurator;
 import ru.ange.utils.FileLoader;
 import ru.ange.view.timer.MainPane;
-import sun.misc.ClassLoaderUtil;
 
-import javax.swing.*;
-import java.io.File;
-import java.net.URL;
 
 
 public class App extends Application {
@@ -21,8 +17,8 @@ public class App extends Application {
     private static final String APP_NAME = "Seignior Pomodoro";
     private static final String LOGO_FILE_NAME = "logo.png";
 
-    private static final int DEF_WIDTH = 300;
-    private static final int DEF_HEIGHT = 250;
+    private static final int DEF_WIDTH = 380;
+    private static final int DEF_HEIGHT = 270;
 
     public void start(Stage stage) throws Exception {
         MainPaneController mpc = new MainPaneController(this);
@@ -52,8 +48,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-
-
 
 }
