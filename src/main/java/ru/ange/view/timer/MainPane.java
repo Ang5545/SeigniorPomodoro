@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import org.classpath.icedtea.pulseaudio.PulseAudioClip;
 import ru.ange.controller.timer.MainPaneController;
 import ru.ange.controller.timer.Subscriber;
 import ru.ange.utils.FileLoader;
@@ -82,11 +81,12 @@ public class MainPane extends StackPane implements Subscriber {
 
         ToggleGroup group = new PersistentButtonToggleGroup();
 
-
         this.pomodoroBtt = createToggleBtt(POMODORO_BTT_TEXT, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 mpc.switchToPomodoro();
                 mpc.startTimer();
+                startBtt.setText(PAUSE_BTT_TEXT);
+                startBtt.setGraphic(getBttImageView(PAUSE_IMAGE));
             }
         }, TOMATO_IMAGE, 110, group);
         pomodoroBtt.setSelected(true);
@@ -95,6 +95,8 @@ public class MainPane extends StackPane implements Subscriber {
             public void handle(ActionEvent event) {
                 mpc.switchToShortBreak();
                 mpc.startTimer();
+                startBtt.setText(PAUSE_BTT_TEXT);
+                startBtt.setGraphic(getBttImageView(PAUSE_IMAGE));
             }
         }, CUCUMBER_IMAGE, 110, group);
 
@@ -102,6 +104,8 @@ public class MainPane extends StackPane implements Subscriber {
             public void handle(ActionEvent event) {
                 mpc.switchToLongBreak();
                 mpc.startTimer();
+                startBtt.setText(PAUSE_BTT_TEXT);
+                startBtt.setGraphic(getBttImageView(PAUSE_IMAGE));
             }
         }, CARROT_IMAGE, 110, group);
 

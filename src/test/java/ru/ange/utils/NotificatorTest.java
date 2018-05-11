@@ -7,7 +7,7 @@ public class NotificatorTest extends TestCase {
     public void testNotice() {
 
         Notificator notificator = new Notificator();
-        notificator.notice("", "");
+        notificator.notice("Test", "message");
 
     }
 }

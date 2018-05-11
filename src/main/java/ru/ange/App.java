@@ -18,7 +18,7 @@ public class App extends Application {
     private static final String LOGO_FILE_NAME = "logo.png";
 
     private static final int DEF_WIDTH = 380;
-    private static final int DEF_HEIGHT = 270;
+    private static final int DEF_HEIGHT = 300;
 
     public void start(Stage stage) throws Exception {
         MainPaneController mpc = new MainPaneController(this);
