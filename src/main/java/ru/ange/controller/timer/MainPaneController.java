@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 import ru.ange.App;
+import ru.ange.model.timer.LongBreakTimer;
+import ru.ange.model.timer.PomodoroTimer;
+import ru.ange.model.timer.ShortBreakTimer;
 import ru.ange.model.timer.Timer;
 import ru.ange.utils.Notificator;
 
@@ -18,9 +21,9 @@ public class MainPaneController {
     private App app;
 
     // Model data
-    private Timer pomodo = new Timer(60 * 25, "Время вышло", "Пора сделать перерыв");
-    private Timer shortBreak = new Timer(5, "Перерыв окочен", "Пора вернуться к работе");
-    private Timer longBreak = new Timer(60 * 15, "Время вышло", "Пора вернуться к работе");
+    private Timer pomodo = new PomodoroTimer();
+    private Timer shortBreak = new ShortBreakTimer();
+    private Timer longBreak = new LongBreakTimer();
 
     private Notificator notificator;
 
@@ -108,6 +111,7 @@ public class MainPaneController {
 
     private void refreshTimer() {
         this.timer.reset();
+        this.timeline.stop();
         this.timeline.setCycleCount(timer.getDefTime());
         notifySubscribers(timer.getDefTime());
     }
