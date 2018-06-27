@@ -38,19 +38,19 @@ public class Notificator {
 
     public void notice(String title, String msg) {
         // -- show notification --
-        Notification not = new Notification(title, msg, Notification.INFO_ICON);
-        Notification.Notifier.INSTANCE.notify(not);
+//        Notification not = new Notification(title, msg, Notification.INFO_ICON);
+//        Notification.Notifier.INSTANCE.notify(not);
 
-//        URL icoUrl = FileLoader.getResourceURL("images/buttons/carrot.png");
-//        System.out.println("icoUrl = " + icoUrl);
-//        Notification notification = Notification.builder()
-//                .title(title)
-//                .message(msg)
-//                .icon(Icon.create(icoUrl, "ok"))
-//                .level(Notification.Level.INFO)
-//                .build();
-//
-//        notifier.send(notification);
+        URL icoUrl = FileLoader.getResourceURL("images/buttons/carrot.png");
+        System.out.println("icoUrl = " + icoUrl);
+        Notification notification = Notification.builder()
+                .title(title)
+                .message(msg)
+                .icon(Icon.create(icoUrl, "ok"))
+                .level(Notification.Level.INFO)
+                .build();
+
+      //  notifier.send(notification);
 
 
         // -- play sound --
