@@ -1,6 +1,9 @@
 package ru.ange.utils;
 
-import fr.jcgay.notification.*;
+import fr.jcgay.notification.Application;
+import fr.jcgay.notification.Icon;
+import fr.jcgay.notification.Notifier;
+import fr.jcgay.notification.SendNotification;
 import ru.ange.conf.Path;
 
 import javax.sound.sampled.*;
@@ -41,17 +44,19 @@ public class Notificator {
 //        Notification not = new Notification(title, msg, Notification.INFO_ICON);
 //        Notifier.INSTANCE.notify(not);
 
-        URL icoUrl = FileLoader.getResourceURL("images/buttons/carrot.png");
-        System.out.println("icoUrl = " + icoUrl);
-        Notification notification = Notification.builder()
-                .title(title)
-                .message(msg)
-                .icon(Icon.create(icoUrl, "ok"))
-                .level(Notification.Level.INFO)
-                .build();
+//        URL icoUrl = FileLoader.getResourceURL("images/buttons/carrot.png");
+//        System.out.println("icoUrl = " + icoUrl);
+//        Notification notification = Notification.builder()
+//                .title(title)
+//                .message(msg)
+//                .icon(Icon.create(icoUrl, "ok"))
+//                .level(Notification.Level.INFO)
+//                .build();
+//
+//        notifier.send(notification);
 
-        notifier.send(notification);
-
+        NotificationFacade nf = new NotificationFacade();
+        nf.notoficate();
 
         // -- play sound --
         this.alarm(endAlarm);

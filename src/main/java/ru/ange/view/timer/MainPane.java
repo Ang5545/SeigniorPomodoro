@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import org.classpath.icedtea.pulseaudio.PulseAudioClip;
 import ru.ange.controller.timer.MainPaneController;
 import ru.ange.controller.timer.Subscriber;
 import ru.ange.utils.FileLoader;

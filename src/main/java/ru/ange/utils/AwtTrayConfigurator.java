@@ -1,7 +1,6 @@
 package ru.ange.utils;
 
 import com.apple.eawt.Application;
-import ru.ange.conf.Path;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
